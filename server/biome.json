@@ -13,7 +13,7 @@
 		"enabled": true,
 		"indentStyle": "tab",
 		"indentWidth": 2,
-		"lineWidth": 80
+		"lineWidth": 85
 	},
 	"organizeImports": {
 		"enabled": true
@@ -27,9 +27,9 @@
 	"javascript": {
 		"formatter": {
 			"quoteStyle": "single",
-			"semicolons":"asNeeded",
+			"semicolons": "asNeeded",
 			"arrowParentheses": "asNeeded",
-			"jsxQuoteStyle": "double",
+			"jsxQuoteStyle": "single",
 			"trailingCommas": "es5"
 		}
 	}
