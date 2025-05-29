@@ -2,7 +2,7 @@ import { incrementAccessCountLink } from "@/functions/increment-access-count-lin
 import type { FastifyInstance } from "fastify";
 
 export async function incrementAccessCountLinkRoute(app: FastifyInstance) {
-	app.post("/increment-access-count-link", async (request, reply) => {
+	app.patch("/increment-access-count-link", async (request, reply) => {
 		const { id } = request.body as { id: string };
 
 		if (!id) {
@@ -10,7 +10,7 @@ export async function incrementAccessCountLinkRoute(app: FastifyInstance) {
 		}
 
 		try {
-			const result = await incrementAccessCountLink(id);
+			await incrementAccessCountLink(id);
 
 			return reply.status(200).send({
 				message: "Access count incremented successfully",
