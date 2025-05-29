@@ -14,11 +14,7 @@ export async function addLinkRoute(app: FastifyInstance) {
 				.send({ error: "originalLink AND shortLink are required" });
 		}
 
-		const result = await addLink({ originalLink, shortLink });
-
-		if (!result) {
-			return reply.status(500).send({ error: "Failed to add link" });
-		}
+		await addLink({ originalLink, shortLink });
 
 		return reply.status(201).send();
 	});
