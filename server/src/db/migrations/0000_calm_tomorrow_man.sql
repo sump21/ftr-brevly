@@ -3,6 +3,6 @@ CREATE TABLE "links" (
 	"original_link" text NOT NULL,
 	"short_link" text NOT NULL,
 	"access_count" integer DEFAULT 0 NOT NULL,
-	"created_at" timestamp DEFAULT now(),
+	"created_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "links_short_link_unique" UNIQUE("short_link")
 );
