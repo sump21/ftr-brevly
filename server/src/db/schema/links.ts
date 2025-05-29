@@ -7,5 +7,5 @@ export const links = pgTable("links", {
 	originalLink: text("original_link").notNull(),
 	shortLink: text("short_link").notNull().unique(),
 	accessCount: integer("access_count").notNull().default(0),
-	createdAt: timestamp("created_at").defaultNow(),
+	createdAt: timestamp("created_at").notNull().defaultNow(),
 });

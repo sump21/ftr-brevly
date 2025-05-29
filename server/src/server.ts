@@ -6,6 +6,7 @@ import {
 	validatorCompiler,
 } from "fastify-type-provider-zod";
 import { addLinkRoute } from "./routes/add-link";
+import { generateLinksCsvRoute } from "./routes/generate-csv-links";
 import { getLinksRoute } from "./routes/get-links";
 import { getOriginalLinkRoute } from "./routes/get-original-link";
 import { incrementAccessCountLinkRoute } from "./routes/increment-access-count-link";
@@ -36,6 +37,7 @@ server.register(removeLinkRoute);
 server.register(getLinksRoute);
 server.register(incrementAccessCountLinkRoute);
 server.register(getOriginalLinkRoute);
+server.register(generateLinksCsvRoute);
 
 server.listen({ port: 3000, host: "0.0.0.0" }).then(() => {
 	console.log("HTTP Server running!");
