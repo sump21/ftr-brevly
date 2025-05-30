@@ -3,16 +3,17 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { addLinks } from "../api/add-link";
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useForm} from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from 'sonner'
+import { AxiosError } from "axios";
 
 const addLinkInput = z.object({
-  originalLink: z.string().url("Informe uma URL válida."),
+  originalLink: z.string().url("Informe uma url válida."),
   shortLink: z.string().regex(
-			/^[a-zA-Z0-9_-]+$/,
-			"Informe uma url minúscula e sem espaço/caracter especial.",
-		),
+		/^[a-zA-Z0-9]+$/, 
+		"Informe uma url minúscula e sem espaços/caracteres especiais."
+	),
 });
 
 type AddLinkInput = z.infer<typeof addLinkInput>;
@@ -35,52 +36,48 @@ export function LinkForm() {
 	const queryClient = useQueryClient()
 
 	const { mutate: addLinkMutation } = useMutation({
-    mutationFn: addLinks,
-    onMutate: () => {
-        toast.loading("Adicionando link...")
-    },
-    onSuccess: () => {
-        toast.success("Link adicionado com sucesso!")
-        reset()
-        queryClient.invalidateQueries({ queryKey: ['links'] })
-    },
-    onError: (error) => {
-        console.log(error)
-        toast.error("Erro ao adicionar link")
-    }
-})
+		mutationFn: addLinks,
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['links'] })
+			reset()
+		},
+		onError: (error) => {
+			if (error instanceof AxiosError) {
+				toast.error("Erro no cadastro", {
+					description: error.response?.data.error,
+				})
+			}
+		}
+	})
 
 async function handleSubmitForm(data: AddLinkInput) {
-    console.log(data)
-    addLinkMutation({
-        originalLink: data.originalLink,
-        shortLink: data.shortLink,
-    })
+	addLinkMutation({
+		originalLink: data.originalLink,
+		shortLink: data.shortLink,
+	})
 }
-
 	
 	return (
+		<div className="w-full sm:min-w-80 p-6 sm:p-8 flex flex-col justify-center bg-white rounded-lg">
+			<h2 className="flex text-xl text-grayscale-600 mb-3">Novo link</h2>
 			<form onSubmit={handleSubmit(handleSubmitForm)} className="flex flex-col">
-
 				<Label text="Link original" />
 				<Input
-						type="text"
-						placeholder="www.exemplo.com.br"
-						onChange={(value) => (value)}
-						error={errors.originalLink?.message || ''}
-						disabled={false}
-						{...register("originalLink")}
+					type="text"
+					placeholder="http://exemplo.com.br"
+					error={errors.originalLink?.message || ''}
+					disabled={isSubmitting}
+					{...register("originalLink")}
 				/>
 
 
 				<Label text="Link encurtado" />
-<Input
-    prefix="brev.ly/"
-    onChange={(value) => (value)}
-    error={errors.shortLink?.message || ''}
-    disabled={false}
-    {...register("shortLink")}
-/>
+				<Input
+					prefix="brev.ly/"
+					error={errors.shortLink?.message || ''}
+					disabled={isSubmitting}
+					{...register("shortLink")}
+				/>
 
 				<button
 					type="submit"
@@ -90,5 +87,6 @@ async function handleSubmitForm(data: AddLinkInput) {
 					{isSubmitting ? "Salvando..." : "Salvar link"}
 				</button>
 			</form>
+		</div>
 	);
 }
