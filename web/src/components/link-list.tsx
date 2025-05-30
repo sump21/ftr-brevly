@@ -25,8 +25,6 @@ export function LinkList({links, isLoading}: any) {
 									shortLink={link.shortLink}
 									originalLink={link.originalLink}
 									accessCount={link.accessCount}
-									onCopy={() => navigator.clipboard.writeText(link.shortLink)}
-									onDelete={() => console.log('Deletar', link.id)}
 								/>
 							))
 						)}
