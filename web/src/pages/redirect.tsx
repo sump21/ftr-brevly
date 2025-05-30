@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { LogoIcon } from "../shared/logo-icon";
 import { getLink } from '../api/get-link';
@@ -8,34 +8,43 @@ export function RedirectPage() {
   const { shortLink } = useParams<{ shortLink: string }>();
   const navigate = useNavigate();
   const [originalLink, setOriginalLink] = useState<string>('');
-
-	console.log(shortLink);
+  const hasIncrementedRef = useRef(false);
+  const isProcessingRef = useRef(false);
 
   useEffect(() => {
     const handleRedirect = async () => {
-      if (!shortLink) {
-				setTimeout(() => {
-					navigate('/not-found');
-				}, 2000);
+      if (isProcessingRef.current) {
         return;
       }
 
+      if (!shortLink) {
+        setTimeout(() => {
+          navigate('/not_found');
+        }, 2000);
+        return;
+      }
+
+      isProcessingRef.current = true;
+
       try {
         const linkData = await getLink({ shortLink });
-				const linkId = linkData.id;
         setOriginalLink(linkData.originalLink);
 
-        await incrementCountLink({ id: linkId });
+        if (!hasIncrementedRef.current) {
+          await incrementCountLink({ id: linkData.id });
+          hasIncrementedRef.current = true;
+        }
 
         setTimeout(() => {
           window.location.href = linkData.originalLink;
         }, 2000);
 
       } catch (error) {
-        console.error('Erro ao buscar link:', error);
         setTimeout(() => {
-          navigate('/');
+          navigate('/not_found');
         }, 2000);
+      } finally {
+        isProcessingRef.current = false;
       }
     };
 

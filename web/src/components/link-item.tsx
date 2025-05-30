@@ -20,11 +20,6 @@ const onCopyLink = (shortLink: string) => {
   navigator.clipboard.writeText(linkFormat);
 };
 
-const handleLinkClick = (shortLink: string) => {
-  console.log(`Link clicado: ${shortLink}`);
-  window.open(`/${shortLink}`, '_blank');
-};
-
 export function LinkItem({
   id,
   shortLink,
@@ -64,12 +59,14 @@ export function LinkItem({
     >
       <div className="w-1/2 flex items-center gap-2">
         <div className="w-full flex flex-col gap-1">
-          <button
-            onClick={() => handleLinkClick(shortLink)}
-            className="text-md text-blue-base truncate hover:underline hover:cursor-pointer text-left"
+          <a
+            href={`/${shortLink}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-md text-blue-base truncate hover:underline hover:cursor-pointer"
           >
             {`${env.VITE_FRONTEND_URL}/${shortLink}`}
-          </button>
+          </a>
           <span className="text-grayscale-500 text-sm">{originalLink}</span>
         </div>
       </div>
