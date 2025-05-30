@@ -2,15 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import { LinkForm } from "../components/link-form";
 import { LinkList } from "../components/link-list";
 import { Logo } from "../shared/logo";
-import { api, queryKeys } from "../api";
+import { getLinks } from "../api/get-links";
 
 export function HomePage() {
   const { 
     data, 
     isLoading, 
   } = useQuery({
-    queryKey: queryKeys.links,
-    queryFn: api.getLinks,
+    queryKey: ['links'],
+    queryFn: getLinks,
   });
 
 	return (

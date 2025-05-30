@@ -1,9 +1,10 @@
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { queryClient } from "./api";
 import { HomePage } from "./pages/home";
 import { NotFoundPage } from "./pages/not-found";
 import { RedirectPage } from "./pages/redirect";
+
+const queryClient = new QueryClient();
 
 export function App() {
 	return (
