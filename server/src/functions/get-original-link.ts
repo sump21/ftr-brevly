@@ -4,22 +4,23 @@ import { eq } from "drizzle-orm";
 import { z } from "zod";
 
 const getOriginalLinkInput = z.object({
-	id: z.string().uuid("ID must be a UUID"),
+	shortLink: z.string(),
 });
 
 type GetOriginalLinkInput = z.input<typeof getOriginalLinkInput>;
 
 type GetOriginalLinkOutput = {
+	id: string;
 	originalLink: string;
 	accessCount: number;
 };
 
 export async function getOriginalLink(
-	id: string,
+	shortLink: string,
 ): Promise<GetOriginalLinkOutput> {
 	let link: GetOriginalLinkInput;
 	try {
-		link = getOriginalLinkInput.parse({ id });
+		link = getOriginalLinkInput.parse({ shortLink });
 	} catch (error) {
 		if (error instanceof z.ZodError) {
 			const message = error.errors.map((e) => e.message).join("; ");
@@ -30,11 +31,12 @@ export async function getOriginalLink(
 
 	const result = await db
 		.select({
+			id: schema.links.id,
 			originalLink: schema.links.originalLink,
 			accessCount: schema.links.accessCount,
 		})
 		.from(schema.links)
-		.where(eq(schema.links.id, link.id));
+		.where(eq(schema.links.shortLink, link.shortLink));
 
 	if (result.length === 0) {
 		throw new Error("Link not found");
