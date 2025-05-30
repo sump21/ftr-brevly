@@ -1,12 +1,20 @@
 import { CopyIcon, TrashIcon } from "@phosphor-icons/react";
+import { env } from "../env";
+import { toast } from "sonner";
 
 type LinkItemProps = {
   id: string;
   shortLink: string;
   originalLink: string;
   accessCount: number;
-  onCopy: () => void;
-  onDelete: () => void;
+};
+
+const onCopyLink = (shortLink: string) => {
+  const linkFormat = `${env.VITE_FRONTEND_URL}/${shortLink}`
+  toast.info("Link copiado com sucesso!", {
+    description: `O link ${shortLink} foi copiado para a área de transferência.`,
+  });
+  navigator.clipboard.writeText(linkFormat);
 };
 
 export function LinkItem({
@@ -14,8 +22,6 @@ export function LinkItem({
   shortLink,
   originalLink,
   accessCount,
-  onCopy,
-  onDelete,
 }: LinkItemProps) {
   return (
     <div
@@ -40,7 +46,7 @@ export function LinkItem({
 
         <div className="h-8 p-2 bg-grayscale-200 rounded-md hover:outline hover:outline-1 hover:outline-blue-dark hover:cursor-pointer">
           <button
-            onClick={onCopy}
+            onClick={() => onCopyLink(shortLink)}
             className="flex text-gray-500 h-full items-center content-center"
           >
             <CopyIcon size={16} className="fill-grayscale-500" />
@@ -49,7 +55,7 @@ export function LinkItem({
 
         <div className="h-8 p-2 bg-grayscale-200 rounded-md hover:outline hover:outline-1 hover:outline-blue-dark hover:cursor-pointer">
           <button
-            onClick={onDelete}
+            onClick={() => {}}
             className="flex text-gray-500 h-full items-center content-center"
           >
             <TrashIcon size={16} className="fill-grayscale-500" />
