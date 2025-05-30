@@ -13,12 +13,6 @@ type LinkItemProps = {
   accessCount: number;
 };
 
-const removeLinkInput = z.object({
-  originalLink: z.string().uuid(),
-});
-
-type RemoveLinkInput = z.infer<typeof removeLinkInput>;
-
 const onCopyLink = (shortLink: string) => {
   const linkFormat = `${env.VITE_FRONTEND_URL}/${shortLink}`
   toast.info("Link copiado com sucesso!", {
@@ -68,9 +62,9 @@ export function LinkItem({
           <a
             href={`${originalLink}`}
             target="_blank"
-            className="font-md text-blue-base truncate hover:underline hover:cursor-pointer"
+            className="text-md text-blue-base truncate hover:underline hover:cursor-pointer"
           >
-            {shortLink}
+            {`${env.VITE_FRONTEND_URL}/${shortLink}`}
           </a>
           <span className="text-grayscale-500 text-sm">{originalLink}</span>
         </div>
