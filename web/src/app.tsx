@@ -14,8 +14,8 @@ export function App() {
 				<BrowserRouter>
 					<Routes>
 						<Route index element={<HomePage />} />
-						<Route path="/:shortUrl" element={<RedirectPage />} />
-						<Route path="/not-found" element={<NotFoundPage />} />
+						<Route path="/:shortLink" element={<RedirectPage />} />
+						<Route path="/not_found" element={<NotFoundPage />} />
 					</Routes>
 				</BrowserRouter>
 			</QueryClientProvider>

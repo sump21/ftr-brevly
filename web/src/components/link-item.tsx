@@ -1,7 +1,6 @@
 import { CopyIcon, TrashIcon } from "@phosphor-icons/react";
 import { env } from "../env";
 import { toast } from "sonner";
-import { z } from "zod";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { removeLinks } from "../api/remove-link";
 import { AxiosError } from "axios";
@@ -19,6 +18,11 @@ const onCopyLink = (shortLink: string) => {
     description: `O link ${shortLink} foi copiado para a área de transferência.`,
   });
   navigator.clipboard.writeText(linkFormat);
+};
+
+const handleLinkClick = (shortLink: string) => {
+  console.log(`Link clicado: ${shortLink}`);
+  window.open(`/${shortLink}`, '_blank');
 };
 
 export function LinkItem({
@@ -52,6 +56,7 @@ export function LinkItem({
       removeLinkMutation({ id });
     }
   };
+
   return (
     <div
       key={id}
@@ -59,13 +64,12 @@ export function LinkItem({
     >
       <div className="w-1/2 flex items-center gap-2">
         <div className="w-full flex flex-col gap-1">
-          <a
-            href={`${originalLink}`}
-            target="_blank"
-            className="text-md text-blue-base truncate hover:underline hover:cursor-pointer"
+          <button
+            onClick={() => handleLinkClick(shortLink)}
+            className="text-md text-blue-base truncate hover:underline hover:cursor-pointer text-left"
           >
             {`${env.VITE_FRONTEND_URL}/${shortLink}`}
-          </a>
+          </button>
           <span className="text-grayscale-500 text-sm">{originalLink}</span>
         </div>
       </div>
