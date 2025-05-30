@@ -1,12 +1,12 @@
-export function NotFound() {
+export function NotFound(className) {
 	return (
 		<svg
-			width="128"
-			height="56"
+			width="194"
+			height="85"
 			viewBox="0 0 128 56"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
-			className="h-16 sm:h-20 mb-4"
+			className={className}
 		>
 			<title>NotFound</title>
 			<path
