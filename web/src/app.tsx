@@ -1,3 +1,5 @@
+import { HomePage } from "./pages/home";
+
 export function App() {
-	return <h1>Brev.Ly</h1>;
+	return <HomePage />;
 }
