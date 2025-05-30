@@ -1,6 +1,7 @@
 import { LinkEmptyList } from "./link-empty-list";
 import { LinkItem } from "./link-item";
 import { LinkListHeader } from "./link-list-header";
+import { Spinner } from "@phosphor-icons/react";
 
 export function LinkList({links, isLoading}: any) {
 	return (
@@ -9,8 +10,8 @@ export function LinkList({links, isLoading}: any) {
 			<div className="max-h-96 overflow-y-auto overflow-y-auto [&::-webkit-scrollbar]:w-3 [&::-webkit-scrollbar-track]:rounded-none [&::-webkit-scrollbar-track]:bg-white [&::-webkit-scrollbar-thumb]:rounded-none [&::-webkit-scrollbar-thumb]:bg-blue-base pr-3">
 			
 				{isLoading ? (
-					<div className="flex flex-col items-center justify-center">
-						<div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-grayscale-500"></div>
+					<div className="flex flex-col items-center justify-center mt-3">
+						<Spinner className="animate-spin rounded-full h-6 w-6 border-grayscale-500" />
 						<p className="text-xs text-grayscale-500 uppercase mt-3">Carregando Links...</p>
 					</div>
 				) : (
@@ -25,8 +26,6 @@ export function LinkList({links, isLoading}: any) {
 									shortLink={link.shortLink}
 									originalLink={link.originalLink}
 									accessCount={link.accessCount}
-									onCopy={() => navigator.clipboard.writeText(link.shortLink)}
-									onDelete={() => console.log('Deletar', link.id)}
 								/>
 							))
 						)}

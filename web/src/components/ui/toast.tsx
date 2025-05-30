@@ -4,13 +4,12 @@ export const ToasterCustom = () => (
   <Sonner
     richColors
     toastOptions={{
-      duration: 4000,
+      duration: 3000,
       classNames: {
-        error:
-          'bg-red-200 text-red-800 border-red-300',
-          title: 'text-sm font-semibold text-danger',
-          description: 'text-sm font-normal text-danger',
-          icon: 'text-danger',
+        title: 'text-sm font-semibold',
+        description: 'text-sm font-normal',
+        error: 'text-danger',
+        info: 'text-blue-base',
       },
     }}
   />
