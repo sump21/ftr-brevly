@@ -2,7 +2,7 @@ import { WarningIcon } from "@phosphor-icons/react";
 
 export function LinkForm() {
 	return (
-		<div className="w-full sm:min-w-96 p-6 sm:p-8 flex flex-col justify-center bg-white rounded-lg">
+		<div className="w-full sm:min-w-80 p-6 sm:p-8 flex flex-col justify-center bg-white rounded-lg">
 			<h2 className="flex text-xl text-grayscale-600 mb-3">Novo link</h2>
 			<form className="flex flex-col">
 				<div>
