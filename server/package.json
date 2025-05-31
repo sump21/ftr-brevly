@@ -8,7 +8,8 @@
 		"dev": "tsx watch --env-file .env src/server.ts",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
-		"db:studio": "drizzle-kit studio"
+		"db:studio": "drizzle-kit studio",
+		"build": "tsup-node"
 	},
 	"keywords": [],
 	"author": "",
@@ -18,6 +19,7 @@
 		"@biomejs/biome": "^1.9.4",
 		"@types/node": "^22.15.23",
 		"drizzle-kit": "^0.31.1",
+		"tsup": "^8.5.0",
 		"tsx": "^4.19.4",
 		"typescript": "^5.8.3"
 	},
