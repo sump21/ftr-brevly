@@ -3,10 +3,13 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { addLinks } from "../api/add-link";
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useForm } from 'react-hook-form'
+import * as ReactHookForm from 'react-hook-form'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from 'sonner'
 import { AxiosError } from "axios";
+
+// @ts-ignore
+const { useForm } = ReactHookForm;
 
 const addLinkInput = z.object({
   originalLink: z.string().url("Informe uma url válida."),

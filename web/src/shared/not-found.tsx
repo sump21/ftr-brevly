@@ -1,4 +1,8 @@
-export function NotFound(className) {
+interface NotFoundProps {
+	className?: string;
+}
+
+export function NotFound({className}: NotFoundProps) {
 	return (
 		<svg
 			width="194"
