@@ -1,7 +1,7 @@
 import { LinkEmptyList } from "./link-empty-list";
 import { LinkItem } from "./link-item";
 import { LinkListHeader } from "./link-list-header";
-import { Spinner } from "@phosphor-icons/react";
+import { SpinnerIcon } from "@phosphor-icons/react/ssr";
 
 export function LinkList({links, isLoading}: any) {
 	return (
@@ -11,7 +11,7 @@ export function LinkList({links, isLoading}: any) {
 			
 				{isLoading ? (
 					<div className="flex flex-col items-center justify-center mt-3">
-						<Spinner className="animate-spin rounded-full h-6 w-6 border-grayscale-500" />
+						<SpinnerIcon className="animate-spin rounded-full h-6 w-6 border-grayscale-500" />
 						<p className="text-xs text-grayscale-500 uppercase mt-3">Carregando Links...</p>
 					</div>
 				) : (
@@ -19,7 +19,7 @@ export function LinkList({links, isLoading}: any) {
 						{links && links.length === 0 ? (
 							<LinkEmptyList />
 						) : (
-							links.map((link) => (
+							links.map((link : any) => (
 								<LinkItem
 									key={link.id}
 									id={link.id}

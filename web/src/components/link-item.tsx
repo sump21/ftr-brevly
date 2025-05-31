@@ -1,4 +1,4 @@
-import { CopyIcon, TrashIcon } from "@phosphor-icons/react";
+import { CopyIcon, TrashIcon } from "@phosphor-icons/react/ssr";
 import { env } from "../env";
 import { toast } from "sonner";
 import { useMutation, useQueryClient } from '@tanstack/react-query';

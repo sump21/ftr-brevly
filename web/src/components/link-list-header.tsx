@@ -1,4 +1,4 @@
-import { DownloadSimpleIcon } from "@phosphor-icons/react";
+import { DownloadSimpleIcon } from "@phosphor-icons/react/ssr";
 
 export function LinkListHeader() {
   return (

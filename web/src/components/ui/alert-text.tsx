@@ -1,4 +1,4 @@
-import { WarningIcon } from "@phosphor-icons/react";
+import { WarningIcon } from "@phosphor-icons/react/ssr";
 
 type AlertTextProps = {
   text: string;
