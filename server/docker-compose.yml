@@ -1,4 +1,19 @@
 services:
+  backend:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://docker:docker@pg:5432/brevly
+      - PORT=3000
+      - NODE_ENV=development
+    env_file:
+      - .env
+    depends_on:
+      - pg
+
   pg:
     image: bitnami/postgresql:latest
     ports:
@@ -8,4 +23,8 @@ services:
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=brevly
     volumes:
-      - './docker:/docker-entrypoint-initdb.d'
+      - ./docker:/docker-entrypoint-initdb.d
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
