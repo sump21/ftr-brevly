@@ -1,4 +1,4 @@
-import { LinkIcon } from "@phosphor-icons/react";
+import { LinkIcon } from "@phosphor-icons/react/ssr";
 
 export function LinkEmptyList() {
   return (

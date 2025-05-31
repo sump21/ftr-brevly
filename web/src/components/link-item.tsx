@@ -1,7 +1,6 @@
-import { CopyIcon, TrashIcon } from "@phosphor-icons/react";
+import { CopyIcon, TrashIcon } from "@phosphor-icons/react/ssr";
 import { env } from "../env";
 import { toast } from "sonner";
-import { z } from "zod";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { removeLinks } from "../api/remove-link";
 import { AxiosError } from "axios";
@@ -52,6 +51,7 @@ export function LinkItem({
       removeLinkMutation({ id });
     }
   };
+
   return (
     <div
       key={id}
@@ -60,8 +60,9 @@ export function LinkItem({
       <div className="w-1/2 flex items-center gap-2">
         <div className="w-full flex flex-col gap-1">
           <a
-            href={`${originalLink}`}
+            href={`/${shortLink}`}
             target="_blank"
+            rel="noopener noreferrer"
             className="text-md text-blue-base truncate hover:underline hover:cursor-pointer"
           >
             {`${env.VITE_FRONTEND_URL}/${shortLink}`}
