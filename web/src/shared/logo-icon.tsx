@@ -1,4 +1,8 @@
-export function LogoIcon({className}) {
+interface LogoIconProps {
+	className?: string;
+}
+
+export function LogoIcon({className}: LogoIconProps) {
 	return (
 		<svg
 			viewBox="0 0 52 52"
