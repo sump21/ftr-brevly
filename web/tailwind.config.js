@@ -55,6 +55,9 @@ export default {
 				"grayscale-600": "#1F2025",
 				danger: "#B12C4D",
 			},
+			width: {
+				"40p": "40%",
+			},
 		},
 	},
 	plugins: [],
