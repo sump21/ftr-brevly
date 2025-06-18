@@ -67,7 +67,7 @@ export function LinkItem({
           >
             {`${env.VITE_FRONTEND_URL}/${shortLink}`}
           </a>
-          <span className="text-grayscale-500 text-sm">{originalLink}</span>
+          <span className="text-grayscale-500 text-sm truncate">{originalLink}</span>
         </div>
       </div>
 
