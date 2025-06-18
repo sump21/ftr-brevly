@@ -14,16 +14,23 @@ export function HomePage() {
   });
 
 	return (
-		<div className="flex flex-col h-dvh w-full mx-auto items-center justify-center content-center sm:w-max sm:items-start">
-			<div className="mb-4 sm:ml-4">
+		<div className="flex flex-col h-dvh w-full items-center justify-center">
+			<div className="mb-4">
 				<a href="/" title="brev.ly">
 					<Logo className="h-7" />
 				</a>
 			</div>
-			<div className="flex flex-col w-full sm:w-fit p-2 sm:p-4 gap-2 sm:gap-4 h-auto  sm:flex-row items-start">
-				<LinkForm />
+			
+			<div className="w-full max-w-6xl mx-auto px-4">
+				<div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
+					<div className="w-full sm:w-96 flex-shrink-0">
+						<LinkForm />
+					</div>
 
-				<LinkList links={data?.links} isLoading={isLoading} />
+					<div className="w-full sm:flex-1 min-w-0">
+						<LinkList links={data?.links} isLoading={isLoading} />
+					</div>
+				</div>
 			</div>
 		</div>
 	);
